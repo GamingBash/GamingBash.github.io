@@ -37,8 +37,8 @@
     document.querySelector('#concept-result-text').textContent = (match ? 'Matched to existing artwork: ' : 'That idea is outside this demo’s five scenes. Showing an existing sample: ') + title + '. ' + (night ? 'Night mood' : 'Original colours') + ', ' + (pace === .65 ? 'gentle' : pace === 1.4 ? 'lively' : 'normal') + ' motion. New objects and artwork are not generated.';
   }
   prompt.addEventListener('input', () => prompt.setCustomValidity(''));
-  form.addEventListener('submit', event => { event.preventDefault(); preview(); });
-  document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => { prompt.value = button.dataset.prompt; preview(); }));
+  form.addEventListener('submit', event => { event.preventDefault(); preview(); if(prompt.value.trim())window.mopixyConceptFeedback?.(); });
+  document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => { prompt.value = button.dataset.prompt; preview(); window.mopixyConceptFeedback?.(); }));
   pause.addEventListener('click', () => { stopped = !stopped; updateMotion(); });
   document.querySelector('#concept-save').addEventListener('click', async () => {
     await MopixyScenes.ready;
